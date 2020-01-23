@@ -78,7 +78,6 @@ def main(argv):
   print invocation
   p = subprocess.Popen(invocation, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
   out, err = p.communicate()
-  print out
   httpd.terminate()
   files = os.path.splitext(basename)[0]
   for i in range(num):

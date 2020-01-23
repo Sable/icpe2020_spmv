@@ -1,7 +1,7 @@
 #!/bin/bash
 
-tar -xvjf ./input-data/small_benchmarks.tar.bz2 -C ./input-data/
-rm ./input-data/small_benchmarks.tar.bz2
+tar -xvjf ./input-data/benchmarks.tar.bz2 -C ./input-data/
+rm ./input-data/benchmarks.tar.bz2
 
 #./tests/c/run.sh ./input-data/benchmarks float ./raw-data
 

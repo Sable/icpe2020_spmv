@@ -8,7 +8,7 @@ out_dir=`readlink -f $3`
 dir=`find $benchmarks -name "*.mtx"`
 output_csv=`readlink -f $out_dir/$2_"mflops_with_papi.csv"`
 
-`rm -rf $output_csv`
+rm -rf $output_csv
 
 echo "name,outer,inner,N,nnz,coo_sd,coo_mflops,coo_sum,coo_l1,coo_l2,coo_l3,coo_bp,csr_sd,csr_mflops,csr_sum,csr_l1,csr_l2,csr_l3,csr_bp,dia_sd,dia_mflops,dia_sum,dia_l1,dia_l2,dia_l3,dia_bp,ell_sd,ell_mflops,ell_sum,ell_l1,ell_l2,ell_l3,ell_bp" > $output_csv
 

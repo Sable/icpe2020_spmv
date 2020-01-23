@@ -56,6 +56,8 @@ def result(json_string):
   f.write("\n")
   f.close()
   if browser == 0:
-    subprocess.call("killall -9 chrome", shell=True);
-  return "OK"
+    subprocess.Popen(["killall", "-9", "chrome"], stdout=subprocess.PIPE).communicate()
+    sys.stderr.close()
+    sys.exit(0)
+  #return "OK"
 run(host='localhost', port=8080, quiet=True)

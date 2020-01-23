@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ICPE2020 ARTIFACT getting started</title>
+  </head>
+  <body>
+  <h1>Paper : A fully structure-driven performance analysis of SpMV</h1>
+  <h3> Install Docker </h3>
+  <p>Please follow the instructions at <a href="https://docs.docker.com/install/">https://docs.docker.com/install/</a> to install and start the Docker Engine.</p>
+  <h3> Pull Artifact Image</h3>
+  <p>Please open your terminal and run the following command to pull the artifact image:
+  <pre style="color: blue;">docker pull pjots/icpe2020:latest</pre>
+  </p>
+  <h3> Run Artifact </h3>
+  <p>Please run the following command to start running the artifact: 
+  <pre style="color: blue;">docker run pjots/icpe2020:latest</pre>
+  In addition to running the artifact, the outputs can be viewed on the host machine using -v flag as follows :
+  <pre>
+  mkdir -p &lt;HOST_DIRECTORY_PATH&gt;
+  docker run -v &lt;HOST_DIRECTORY_PATH&gt;:/ICPE2020/&lt;CONTAINER_DIRECTORY_PATH&gt; pjots/icpe2020:latest</pre>
+  The following example is to view the generated RQ1 plots for SpMV C implementation at the desired HOST_DIRECTORY :
+  <pre style="color: blue;">docker run -v &lt;HOST_DIRECTORY_PATH&gt;:/ICPE2020/analysis/results/RQ1/c pjots/icpe2020:latest</pre>
+  Similarly, you can view the generated plots for other research questions as well for both c and wasm. Please follow <a href="step_by_step.html">Step-by-Step Instruction Guide</a> for more info.</p> 
+  </p>
+  </body>
+</html>

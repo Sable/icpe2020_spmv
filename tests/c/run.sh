@@ -7,7 +7,7 @@ out_dir=`readlink -f $3`
 dir=`find $benchmarks -name "*.mtx"`
 output_csv=`readlink -f $out_dir/$2_"mflops.csv"`
 
-`rm -rf $output_csv`
+rm -rf $output_csv
 
 echo "name,outer,inner,N,nnz,coo_sd,coo_mflops,coo_sum,csr_sd,csr_mflops,csr_sum,dia_sd,dia_mflops,dia_sum,ell_sd,ell_mflops,ell_sum" > $output_csv
 

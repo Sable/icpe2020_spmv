@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ICPE2020 ARTIFACT step-by-step</title>
+  </head>
+  <body>
+    <h1>Paper : A fully structure-driven performance analysis of SpMV</h1>
+    <p>Sparse matrix-vector multiplication (SpMV) implementations for each of the four formats -- COO, CSR, DIA and ELL.
+	y = Ax
+	where A is a M x N sparse matrix with nnz number of non-zeros, x is a dense input vector of size N and y is a dense output vector of size M.</p>
+<I>We provide the artifact as a docker container image for portability.</I>
+  <h2>Target Languages and Runtime</h2>
+    We conducted our experiments on an Intel Core i7-3930K with 6 3.20GHz cores, 32KB L1, 256KB L2, 12MB last-level cache and 16GB memory, running Ubuntu Linux 16.04.2.
+    We compiled our C implementations with gcc-7 at optimization level -O3. For WebAssembly, used the Chrome 74 browser (Official build 74.0.3729.108 with V8 JavaScript engine 7.4.288.25) as the execution environment.
+We run Chrome with a flag --experimental-wasm-simd to enable the use of SIMD (Single Instruction Multiple Data) instructions for loop vectorization optimizations in some of the SpMV WebAssembly implementations.
+We also enable two more flags, --wasm-no-bounds-checks and --wasm-no-stack-checks to avoid memory bounds checks and stack guards for performance testing.
+    <h2>Input Matrices</h2>
+    <p>The input matrix is required to be in Matrix Market format (.mtx). We used 1,979 real-life sparse matrices from The SuiteSparse Matrix Collection (formerly the University of Florida Sparse Matrix Collection) at <a href="https://sparse.tamu.edu">https://sparse.tamu.edu</a> which served as the set of sparse matrix benchmarks for our experiments.
+ In the docker image, we provide these benchmarks in a tarball (.tar.bz2 format).</p>
+    <h2>Software Requirements</h2>
+    All of the following software requirements are met inside the docker container image.
+    <ul>
+    <li>PAPI (Performance API) <a href="http://icl.utk.edu/papi/software/">http://icl.utk.edu/papi/software/</a></li>
+    <li>gcc-7</li>
+    <li>python, pip, matplotlib, pandas</li>
+    <li>chrome browser version 74 (prepacked in the docker image)</li>
+    <li>Add MIME type for wasm inside apache2 config file (check .htaccess file inside wasm src directory)</li>
+    </ul>
+  <h2>Step 1 : Run Experiments</h2>
+    In the home directory, shell script named run.sh executes the following implementations to collect the raw data for our experiments which includes MFLOPS for each matrix on each format, and the comma-separated format output is stored in the raw-data directory.
+    <ol>
+    <li>Run SpMV C implementation (output : raw-data/float_mflops.csv)</li>
+    <li>Run SpMV C implementation with PAPI (Collecting hardware performance counters) (output : raw-data/float_mflops_with_papi.csv)</li>
+    <li>Run C implementation to collect matrix feature (output : raw-data/features.csv)</li>
+    <li>Run SpMV WASM implementation (output : raw-data/sequential-chrome-single.csv)</li>
+    </ol>
+    <h2>Step 2 : Analyze Results</h2>
+    <p>We analyze the results by employing 10%-affinity criteria to obtain the set of matrices for each format category. An input matrix A has an x%-affinity for storage format F, if the performance for F is at least x% better than all other formats and the performance difference is greater than the measurement error. In addition to single-format categories (COO, CSR, DIA and ELL), there exist some cases where more than one format fulfils the x%-affinity metric versus the other formats but the performance between them cannot be distinguished, therefore combination-format categories were introduced.</p>
+    Using scripts at analysis/scripts/RQ1, analysis/scripts/RQ2, analysis/scripts/RQ3, the results are stored at analysis/results/RQ1, analysis/results/RQ2, analysis/results/RQ3 for both c and wasm respectively.
+    <h2>Step 3 : Plot Results</h2>
+    <p>Finally, the plot results are generated via python scripts available at analysis/scripts/RQ1, analysis/scripts/RQ2 and analysis/scripts/RQ3 for each research question for both wasm and C. The plots are stored at analysis/results/RQ1, analysis/results/RQ2 and analysis/results/RQ3.</p>
+
+<p>Two shell scripts are provided : run.sh and run_existing.sh
+where, 
+<br/>run.sh : runs the benchmarks from step 1 to step 3. 
+<br/>run_existing.sh : uses the raw-data previously generated from step 1 and runs only step 2 and step 3.
+</p>
+
+<h2>Notes</h2>
+<ol>
+<li> Depending on the hardware, SpMV C implementation with PAPI may not provide the desired output since the PAPI events may not be supported by the given architecture.</li>
+</ol>
+  </body>
+</html>
