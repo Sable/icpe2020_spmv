@@ -56,7 +56,7 @@ for index, row in df_features.iterrows():
   if temp['format'] == '':
     print(index)
 
-dia = df_features.loc[df_features.format == 'dia']
+dia = df_features.loc[df_features.format == 'dia'].copy()
 dia['ws'] = (dia.num_diags + 2 * dia.N + dia.num_diag_elems) * 4
 dia['perf'] = dia.ratio_diag * dia.mflops
 dia.sort_values(by=['ratio_diag'], ascending=False).to_csv(out_dir + r'combined_dia.csv')
@@ -65,7 +65,7 @@ not_dia.sort_values(by=['ratio_diag'], ascending=False).to_csv(out_dir + r'combi
 comb_dia = df_features[df_features['format'].str.contains('dia_|_dia')]
 comb_dia.sort_values(by=['ratio_diag'], ascending=False).to_csv(out_dir + r'combined_comb_dia.csv')
 
-ell = df_features.loc[df_features.format == 'ell']
+ell = df_features.loc[df_features.format == 'ell'].copy()
 ell['ws'] = (2 * ell.N + ell.num_ell_elems) * 4
 ell.sort_values(by=['max_nnz_row'],ascending=False).to_csv(out_dir + r'combined_ell.csv')
 not_ell = df_features[df_features['ratio_ell'] > 0]
@@ -74,7 +74,7 @@ not_ell.sort_values(by=['max_nnz_row'], ascending=False).to_csv(out_dir + r'comb
 comb_ell = df_features[df_features['format'].str.contains('ell_|_ell')]
 comb_ell.sort_values(by=['max_nnz_row'], ascending=False).to_csv(out_dir + r'combined_comb_ell.csv')
 
-coo = df_features.loc[df_features.format == 'coo']
+coo = df_features.loc[df_features.format == 'coo'].copy()
 coo['ws'] = (2 * coo.N + 3 * coo.nnz) * 4
 coo.sort_values(by=['ws'], ascending=False).to_csv(out_dir + r'combined_coo.csv')
 not_coo = df_features[~df_features['format'].str.contains('coo')]
@@ -82,7 +82,7 @@ not_coo.sort_values(by=['nnz_per_row']).to_csv(out_dir + r'combined_not_coo.csv'
 comb_coo = df_features[df_features['format'].str.contains('coo_|_coo')]
 comb_coo.sort_values(by=['nnz_per_row']).to_csv(out_dir + r'combined_comb_coo.csv')
 
-csr = df_features.loc[df_features.format == 'csr']
+csr = df_features.loc[df_features.format == 'csr'].copy()
 csr = csr.loc[csr.csr_reuse_distance <= 100]
 csr['ws'] = (3 * csr.N + 2 * csr.nnz) * 4
 csr.sort_values(by=['csr_reuse_distance'], ascending=False).to_csv(out_dir + r'combined_csr.csv')

@@ -16,7 +16,7 @@ df = pd.read_csv(sys.argv[1], index_col = 'name')
 
 plt.xlabel('DIA Working Set (bytes)', fontsize=15)
 plt.ylabel('Performance (MFLOPS)', fontsize=15)
-plt.scatter(df['ws'], df['mflops'], label='_nolegend_', c=df['ratio_diag'], cmap='gnuplot2_r', s=12**2, alpha=0.6)
+plt.scatter(df['ws'], df['mflops'], label='_nolegend_', c=df['ratio_diag'], cmap='gnuplot2_r', edgecolors='black', s=12**2, alpha=0.6)
 plt.clim(0.8,3.2)
 plt.xticks(fontsize=15)
 plt.yticks(fontsize=15)

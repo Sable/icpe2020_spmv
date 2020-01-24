@@ -26,9 +26,9 @@ min_bp = bp.min()
 max_bp = bp.max()
 print min_bp
 print max_bp
-plt.scatter(df['nnz_per_row'], df['mflops'], label='CSR', c=df['bp'], cmap='gnuplot2_r', s=12**2, alpha=0.5, marker='^')
+plt.scatter(df['nnz_per_row'], df['mflops'], label='CSR', c=df['bp'], cmap='gnuplot2_r', edgecolors='black', s=12**2, alpha=0.5, marker='^')
 plt.clim(min_bp, max_bp)
-plt.scatter(df_coo['nnz_per_row'], df_coo['mflops'], label='COO', c=df_coo['bp'], cmap='gnuplot2_r', s=12**2, alpha=0.5, marker='*')
+plt.scatter(df_coo['nnz_per_row'], df_coo['mflops'], label='COO', c=df_coo['bp'], cmap='gnuplot2_r', edgecolors='black', s=12**2, alpha=0.5, marker='*')
 plt.clim(min_bp, max_bp)
 cbar = plt.colorbar()
 cbar.ax.tick_params(labelsize=15)
