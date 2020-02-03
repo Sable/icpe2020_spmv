@@ -8,6 +8,10 @@ We conducted our experiments on an Intel Core i7-3930K with 6 3.20GHz cores, 32K
 
 ## How to build a docker image from this repository
 
+### Pre-req : Install pip
+        curl -LO https://bootstrap.pypa.io/get-pip.py
+        python get-pip.py --user
+
 ### 1. Initial setup (including setting up output directories and downloading the tools and input matrices) can be done in one of the two ways as follows :
 
 #### Using script
