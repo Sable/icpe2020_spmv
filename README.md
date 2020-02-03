@@ -13,8 +13,9 @@ The input matrix is required to be in Matrix Market format (.mtx). We used 1,979
 #### Manually
     mkdir -p ./analysis/results/RQ1/c ./analysis/results/RQ2/c ./analysis/results/RQ3/c ./analysis/results/RQ1/wasm ./analysis/results/RQ2/wasm input-data raw-data tools
 
-Please download benchmarks.tar.bz2 from and store it under the directory called input-data
-Please download chrome74.tar from https://drive.google.com/open?id=14_PrH2oHcfrAW2cfo5_yYKb6XiHsZWxz, untar it using tar -xvf chrome74.tar and store it under the directory called tools
+Please download *benchmarks.tar.bz2* from and store it under the directory called *input-data*.
+
+Please download *chrome74.tar* from https://drive.google.com/open?id=14_PrH2oHcfrAW2cfo5_yYKb6XiHsZWxz, untar it using *tar -xvf chrome74.tar* and store it under the directory called *tools*
 
 
 ### 2. Build the docker image
