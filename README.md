@@ -25,3 +25,6 @@ Please download *chrome74.tar* from https://drive.google.com/open?id=14_PrH2oHcf
     docker run pjots/my_image
     
     
+## Feedback
+
+Please contact [Prabhjot](mailto:prabhjot.sandhu@mail.mcgill.ca).
